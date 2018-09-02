@@ -17,6 +17,6 @@ ADD run-config.sh /run-config.sh
 ADD set-password.sh /set-password.sh
 
 RUN chmod +x /run-config.sh
-RUN chmod +x /set_mongodb_password.sh
+RUN chmod +x /set-password.sh
 
 CMD ["/run-config.sh"]
