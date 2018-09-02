@@ -20,7 +20,7 @@ done
 
 # Create the admin user
 echo "=> Creating admin user with a password in MongoDB"
-mongo admin --eval "db.createUser({user: '$MONGODB_ADMIN_USER', pwd: '$MONGODB_ADMIN_PASS', roles:[{role:'root',db:'admin'}]});"
+mongo admin --eval "db.createUser({user: '$MONGODB_ADMIN_USER', pwd: '$MONGODB_ADMIN_PASS', roles:[{role:'root',db:'admin'},{ role: “userAdminAnyDatabase”, db: “admin” }]});"
 
 sleep 3
 
@@ -34,7 +34,7 @@ if [ "$MONGODB_APPLICATION_DATABASE" != "admin" ]; then
     mongo admin -u $MONGODB_ADMIN_USER -p $MONGODB_ADMIN_PASS << EOF
 echo "Using $MONGODB_APPLICATION_DATABASE database"
 use $MONGODB_APPLICATION_DATABASE
-db.createUser({user: '$MONGODB_APPLICATION_USER', pwd: '$MONGODB_APPLICATION_PASS', roles:[{role:'dbOwner', db:'$MONGODB_APPLICATION_DATABASE'}]})
+db.createUser({user: '$MONGODB_APPLICATION_USER', pwd: '$MONGODB_APPLICATION_PASS', roles:[{role:'dbOwner', db:'$MONGODB_APPLICATION_DATABASE'},{ role: “dbAdmin”, db: “$MONGODB_APPLICATION_DATABASE”},{ role: “readWrite”, db: “$MONGODB_APPLICATION_DATABASE” }]})
 EOF
 fi
 
