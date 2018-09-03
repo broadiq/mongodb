@@ -34,7 +34,7 @@ if [ "$MONGODB_APPLICATION_DATABASE" != "admin" ]; then
     mongo admin -u $MONGODB_ADMIN_USER -p $MONGODB_ADMIN_PASS << EOF
 echo "Using $MONGODB_APPLICATION_DATABASE database"
 use $MONGODB_APPLICATION_DATABASE
-db.createUser({user: '$MONGODB_APPLICATION_USER', pwd: '$MONGODB_APPLICATION_PASS', roles:[{role:'dbOwner', db:'$MONGODB_APPLICATION_DATABASE'},{ role: “dbAdmin”, db: “$MONGODB_APPLICATION_DATABASE”},{ role: “readWrite”, db: “$MONGODB_APPLICATION_DATABASE” }]})
+db.createUser({user: '$MONGODB_APPLICATION_USER', pwd: '$MONGODB_APPLICATION_PASS', roles:[{role:'dbOwner', db:'$MONGODB_APPLICATION_DATABASE'}]})
 EOF
 fi
 
